@@ -31,6 +31,7 @@ window.addEventListener('keydown', function(e){
     const audio2 = document.querySelector(`audio[data-key="${e.key}"]`);
     const audio3 = e.key; // can't use to play audio
     console.log(audio2, audio3);
+    audio2.play();
 
     const btnPlaying = document.querySelector(`div[data-key="${e.key}"]`);
     const btnPlaying2 = e.key; // can't use to update classes
