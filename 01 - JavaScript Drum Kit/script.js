@@ -1,4 +1,8 @@
-/* Personal Learning Notes:
+/* YES! The following code is a mess and has not been cleaned or refactored. 
+I do this on purpose so I can remember what I did and learn from it in the future.
+
+
+Personal Learning Notes:
 HTML5 introduced custom data attributes.
 These are anything with data- for which there are no more 
 appropriate attributes or elements. 
@@ -41,10 +45,13 @@ window.addEventListener('keydown', function(e){
 
     btnPlaying.classList.add("playing");
 
-    /* NOTE: for some reason, keyup has to go INSIDE 'keydown' eventListener or else it throws error */
+    /* NOTE: for some reason, keyup has to go INSIDE 'keydown' eventListener 
+    or else it throws error 
+    See his approach below */
     window.addEventListener('keyup', function () {
          btnPlaying.classList.remove("playing");
     });
+
 });
 
 /* Leaving my attempt here to see if I can fix it later?
@@ -53,3 +60,12 @@ window.addEventListener('keyup', function(e) {
     btnDone.classList.remove("playing");
 });
 */
+
+/* His method works, but is much more complicated ... is it more standard?
+const keys = document.querySelectorAll('.key');
+keys.forEach(element => element.addEventListener('transitionend', removeTransition));
+
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return; // skip if no tranform
+    this.classList.remove("playing");
+} */
