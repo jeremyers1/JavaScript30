@@ -31,6 +31,8 @@ window.addEventListener('keydown', function(e){
     const audio2 = document.querySelector(`audio[data-key="${e.key}"]`);
     const audio3 = e.key; // can't use to play audio
     console.log(audio2, audio3);
+    if (!audio2) return; // if no proper key pressed, stop
+    audio2.currentTime = 0; // allows immediate replay of audio
     audio2.play();
 
     const btnPlaying = document.querySelector(`div[data-key="${e.key}"]`);
