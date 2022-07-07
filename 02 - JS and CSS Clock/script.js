@@ -50,17 +50,17 @@ function setClock(){
     const hoursDegrees = ((hours / 12) * 360) + ((minutes/60)*30) + 90;
     hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
    */
-/*
+
     const hours = now.getHours();
     const hoursDegrees = ((((minutes / 60) + hours) / 12) * 360) + 90;
     hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
-*/
- /* Can't figure out why this won't work... */
+
+ /* Can't figure out why this won't work... Figured it out was an errant ')', and now going with simpler code above 
     const hours = now.getHours();
     const hoursRatio = ((minutes / 60) + hours) / 12;
     const hoursDegrees = (hoursRatio * 360) + 90;
     hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
-    
+    */
 
 //    console.log(`${hours}:${minutes}:${seconds}`);
  //   console.log(hoursDegrees, minutesDegrees, secondsDegrees);

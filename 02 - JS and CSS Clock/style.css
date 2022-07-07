@@ -41,13 +41,14 @@ html {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
+    margin-top: 3px;
   }
 
 .clock-face {
     position: relative;
     width: 100%;
     height: 100%;
-   /* transform: translateY(-3px);  account for the height of the clock hands */
+  /* transform: translate(0, -3px);  account for the height of the clock hands */
   }
 
 .hand {
