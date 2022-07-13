@@ -7,6 +7,59 @@
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
+
+  /* To Customize?
+  1. Add custom color picker
+  2. Add custom line width picker
+  3. Use MDN Canvas to allow custom selection of curved lines, straight lines, shapes, etc
+  5. Add custom Composite Operation
+  (puter.com maybe uses Canvas??? )
+  */
+  const canvas = document.getElementById("draw");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  ctx.strokeStyle = "#69D06E";
+  ctx.lineJoin = "round"; // See MDN on Canvas context for more options
+  ctx.lineCap = "round";
+  ctx.lineWidth = 100;
+  ctx.globalCompositeOperation = "multiply"; // like PS blend mode
+ 
+  let isDrawing = false;
+  let lastX = 0;
+  let lastY = 0;
+  let hue = 0; 
+  let direction = true;
+  
+
+  function draw(e){
+    if (!isDrawing) return; // stop function if mouse is not down and moving
+
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`; // Learn more at https://mothereffinghsl.com/
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+
+    hue++;
+    if (hue >=360) hue = 360; // rest so hue doesn't go past 360
+
+    if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) direction = !direction; // flips the direction
+    if (direction === true) ctx.lineWidth++;
+    else ctx.lineWidth--;
+
+  }
+
+  // click and drag functionality
+  canvas.addEventListener("mousemove", draw);
+  canvas.addEventListener("mousedown", (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY]; // reset starting point to wherever mouse currently is
+  });
+  canvas.addEventListener("mouseup", () => isDrawing = false);
+  canvas.addEventListener("mouseout", () => isDrawing = false);
+
 </script>
 
 <style>
