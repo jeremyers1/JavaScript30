@@ -13,33 +13,78 @@
 
     function makeGreen() {
       const p = document.querySelector('p');
-      p.style.color = '#BADA55';
+      p.style.color = '#69D06E';
       p.style.fontSize = '50px';
     }
 
     // Regular
+console.log("Hello");
 
     // Interpolated
+console.log('Hello, I am a %s string!', 'short');
+console.log(`Hello, I am a ${dogs[0].name} string`);
 
     // Styled
+console.log('%c I am some great text', 'font-size:50px; background:red; text-shadow: 10px 10px 0 blue');
 
     // warning!
+console.warn('OH NOOOO'); // provides stack trace
 
     // Error :|
+console.error('Ooops!!!'); // provides stack trace
 
     // Info
+console.info('Crocodiles eat 3-4 people per year');
 
     // Testing
+console.assert(1 === 1, 'That is wrong'); // only fires if something is WRONG... no message if true
+
+const p = document.querySelector('p');
+console.assert(p.classList.contains('ouch'), "Wrong item selected");
 
     // clearing
+console.clear(); // clears console
 
     // Viewing DOM Elements
+console.log(p); // consoles the element selected
+console.dir(p); // provides a dropdown list of the element properties and methods
 
     // Grouping together
+dogs.forEach(dog => {
+  console.group('${dog.name}'); // the variable here doesn't really matter, just use it for both group and groupEnd
+  // can use console.groupCollapsed() to print them to console collapsed
+    console.log(`This is ${dog.name}.`);
+    console.log(`${dog.name} is ${dog.age} years old.`);
+    console.log(`${dog.name} is ${dog.age * 7} dog years old.`);
+  console.groupEnd('${dog.name}');
+});
 
     // counting
+console.count('Jeremy');
+console.count('Jeremy');
+console.count('Jeremy');
+console.count('David');
+console.count('Jeremy');
+console.count('David');
+console.count('David');
+console.count('Jeremy');
+console.count('David');
+console.count('Jeremy');
 
     // timing
+console.time('fetching data'); // string doesn't matter, just use here and below as desiriptor of what you are doing
+fetch('https://api.github.com/users/jeremyers1')
+  .then(data => data.json())
+  .then(data => {
+    console.timeEnd('fetching data'); // use same string variable as above
+    console.log(data);
+  });
+
+// Alternative is performance.now ... but you can look that up yourself
+
+
+  // table
+  console.table(dogs); // more organized way of displaying arrays
 
   </script>
 </body>
