@@ -7,48 +7,124 @@
 <body>
 
   <script>
-    // start with strings, numbers and booleans
+    // start with strings, numbers and booleans --> THESE ARE COPIED
+    let age = 100;
+    let age2 = age;
+    console.log(age, age2);
+    age = 200;
+    console.log(age, age2);
 
-    // Let's say we have an array
+    let name = 'Jeremy';
+    let name2 = name;
+    console.log(name, name2);
+    name = 'Jeremiah'; 
+    console.log(name, name2);
+
+    // Let's say we have an array --> THESE ARE PASSED BY REFERENCE
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
-
     // You might think we can just do something like this:
+    const team = players;
+    console.log(players, team);
 
     // however what happens when we update that array?
+    team[3] = 'Lux'; // this changes BOTH!!
 
     // now here is the problem!
-
     // oh no - we have edited the original array too!
+    console.log(players, team);
 
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
-
     // So, how do we fix this? We take a copy instead!
-
     // one way
+    const players2 = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    const team2 = players2.slice(); // returns a copy of the array so original remains untouched
+    console.log(players2, team2);
+    team2[3] = 'Lux';
+    console.log(players2, team2);
 
     // or create a new array and concat the old one in
+    const players3 = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    const team3 = [].concat(players3); 
+    console.log(players3, team3);
+    team3[3] = 'Lux';
+    console.log(players3, team3);
 
     // or use the new ES6 Spread
+    const players4 = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    const team4 = [...players4]
+    console.log(players4, team4);
+    team4[3] = 'Lux';
+    console.log(players4, team4);
 
+     // or create a new array from the old one
+    const players5 = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    const team5 = Array.from(players5);
+    console.log(players5, team5);
+    team5[3] = 'Lux';
+    console.log(players5, team5);
+    
     // now when we update it, the original one isn't changed
-
     // The same thing goes for objects, let's say we have a person object
 
     // with Objects
     const person = {
-      name: 'Wes Bos',
+      name: 'Jeremy Myers',
       age: 80
     };
 
     // and think we make a copy:
+    const captain = person;
+    captain.number = 99;
+    console.log(person, captain);
 
-    // how do we take a copy instead?
-
+    // how do we take a copy instead? Use object assign
+    const person2 = {
+      name: 'Wes Bos',
+      age: 80
+    };
+    const captain2 = person2;
+    const cap2 = Object.assign({}, person2, {age: 99});
+    console.log(captain2, cap2);
     // We will hopefully soon see the object ...spread
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    const jeremy = {
+      name: 'Jeremy',
+      age: 69, 
+      social: {
+        twitter: '@jeremyers1',
+        github: 'jeremyers1'
+      }
+    }
+
+    console.log(jeremy);
+    const jd = Object.assign({},jeremy, {age:420}); // this works to reassign FIRST LEVEL properties only
+    console.log(jd);
+
+    jd.social.twitter = '@jdmyers_dev'; // this is a second level property, and it also gets changed on jeremy
+    console.log(jeremy, jd);
+
+    // there is a fancy javascript function called clone deep that allows this... but very rarely do you really have to fully clone an object
+
+    // poor man's option: ... stringify the object (which removes all the references), then immediately JSON parse it back into an object
+    const jdm = JSON.parse(JSON.stringify(jeremy));
+    jdm.social.twitter = '@elonmusk';
+    console.log(jeremy, jd, jdm);
+
+    // slightly different, but remember that there is a factory function that can create new, identical, but referentially separate, arrays and objects.
+    // I used on in my battleship game... 
+    let ships = [];
+    
+    function buildShip() {
+        let ship = { locations: ['0'], hits: [''] };
+        return ship;
+    };
+
+    function generateShipArray() {
+        this.ships = Array(this.numShips).fill(0).map(e => this.buildShip());
+    };
 
   </script>
 
