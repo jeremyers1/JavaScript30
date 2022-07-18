@@ -109,6 +109,7 @@
     // there is a fancy javascript function called clone deep that allows this... but very rarely do you really have to fully clone an object
 
     // poor man's option: ... stringify the object (which removes all the references), then immediately JSON parse it back into an object
+    // THIS HAS A PERFORMANCE HIT!
     const jdm = JSON.parse(JSON.stringify(jeremy));
     jdm.social.twitter = '@elonmusk';
     console.log(jeremy, jd, jdm);
