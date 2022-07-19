@@ -36,6 +36,7 @@ function toggleDone(e) { // save item status in localStorage also
     populateList(items, itemsList);
 }
 
+// Take it further assignment 
 function updateList(e){
     if (e.target.matches('.delete')) {
         localStorage.clear();
