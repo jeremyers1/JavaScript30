@@ -23,7 +23,14 @@ function removeArticle(str) {
 	return str;
 }
 
-const alpphaBands = bands.sort((a, b) =>
+const alphaBands = bands.sort((a, b) =>
 	removeArticle(a) > removeArticle(b) ? 1 : -1
 );
 console.log(alphaBands);
+
+const bandList = document.getElementById('bands');
+alphaBands.forEach((band) => {
+	let li = document.createElement('li');
+	li.innerText = band;
+	bandList.appendChild(li);
+});
