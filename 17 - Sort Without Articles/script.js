@@ -15,6 +15,7 @@ const bands = [
 ];
 
 function removeArticle(str) {
+	// JavaScript30 class used RegExp: str.replace(/^(a |the |an )/i, '').trim();
 	let words = str.split(' ');
 	if (words[0] === 'A' || words[0] === 'An' || words[0] === 'The') {
 		words.shift();
@@ -26,8 +27,9 @@ function removeArticle(str) {
 const alphaBands = bands.sort((a, b) =>
 	removeArticle(a) > removeArticle(b) ? 1 : -1
 );
-console.log(alphaBands);
 
+// JavaScript30 class used .map method with innerHTML, but it included commas, so he must strip them out with .join('')
+// document.querySelector('#bands').innerHTML = alphaBands.map(band => `<li>${band}</li>`).join('');
 const bandList = document.getElementById('bands');
 alphaBands.forEach((band) => {
 	let li = document.createElement('li');
