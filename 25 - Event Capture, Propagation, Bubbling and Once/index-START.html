@@ -1,48 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Understanding JavaScript's Capture</title>
-</head>
-<body class="bod">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Understanding JavaScript's Capture</title>
+	</head>
+	<body class="bod">
+		<div class="one">
+			<div class="two">
+				<div class="three"></div>
+			</div>
+		</div>
 
-  <div class="one">
-    <div class="two">
-      <div class="three">
-      </div>
-    </div>
-  </div>
+		<style>
+			html {
+				box-sizing: border-box;
+			}
 
-<style>
-  html {
-    box-sizing: border-box;
-  }
-  
-  *, *:before, *:after { 
-    box-sizing: inherit; 
-  }
+			*,
+			*:before,
+			*:after {
+				box-sizing: inherit;
+			}
 
-  div {
-    width: 100%;
-    padding: 100px;
-  }
+			div {
+				width: 100%;
+				padding: 100px;
+			}
 
-  .one {
-    background: thistle;
-  }
+			.one {
+				background: thistle;
+			}
 
-  .two {
-    background: mistyrose;
-  }
+			.two {
+				background: mistyrose;
+			}
 
-  .three {
-    background: coral;
-  }
-</style>
+			.three {
+				background: coral;
+			}
+		</style>
 
-<button></button>
-<script>
+		<button></button>
+		<script>
+			const divs = document.querySelectorAll('div');
 
-</script>
-</body>
+			function logText(e) {
+				//	console.log(this.classList.value);
+				//	e.stopPropagation(); // stops bubbling up to parent elementsm, wrap in if statement to select particular element
+			}
+
+			divs.forEach(div =>
+				div.addEventListener('click', logText, {
+					capture: true,
+					/* by default, capture is false:
+				When you click, the browser starts in the top of the DOM
+        and captures all the elements on the way down to the element clicked, 
+        then fires eventListener on it's way back up.
+        
+        With capture: true, it fires the event listener on the way down, 
+        as it is capturing all the elements, but then not on the way back up.
+        */
+					once: true, // will only allow this eventListener to run once. Might be helpful if you only want a payment or checkout button to be clicked one time.
+				})
+			);
+		</script>
+	</body>
 </html>
